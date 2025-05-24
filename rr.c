@@ -1,8 +1,6 @@
 #include <stdio.h>
-
 int main() {
-    int burstTime[10], remainingTime[10], waitingTime[10], turnaroundTime[10];
-    int n, remainingProcesses, currentTime = 0, quantum;
+    int burstTime[10], remainingTime[10], waitingTime[10], turnaroundTime[10], n, remainingProcesses, currentTime = 0, quantum;
     float avgWaitTime = 0, avgTurnaroundTime = 0;
     printf("Enter the number of processes: ");
     scanf("%d", &n);
@@ -34,9 +32,7 @@ int main() {
         avgWaitTime += waitingTime[j];
         avgTurnaroundTime += turnaroundTime[j];
     }
-
     printf("Average waiting time: %.2f\n", avgWaitTime / n);
     printf("Average turnaround time: %.2f\n", avgTurnaroundTime / n);
-
     return 0; 
 }

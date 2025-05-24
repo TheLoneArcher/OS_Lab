@@ -1,7 +1,7 @@
 #include <stdio.h>
 void swap(int *a, int *b) { int t = *a; *a = *b; *b = t; }
 int main() {
-    int turnaroundTime[10], burstTime[10], waitingTime[10], priority[10], processId[10], i, j, n;
+    int turnaroundTime[10], burstTime[10], waitingTime[10], priority[10], processId[10], i, j, n; // P BT PRI WT TAT
     float averageWaitingTime = 0, averageTurnaroundTime = 0;
     printf("Enter the number of processes: ");
     scanf("%d", &n);
@@ -22,13 +22,12 @@ int main() {
         printf("%d\t", processId[i]);
     }
     printf("\nP\tBT\tPRI\tWT\tTAT\n");
-    waitingTime[0] = 0;
     for (i = 0; i < n; i++) {
-        if (i > 0) waitingTime[i] = waitingTime[i - 1] + burstTime[i - 1];
         turnaroundTime[i] = burstTime[i] + waitingTime[i];
-        printf("P%d\t%d\t%d\t%d\t%d\n", processId[i], burstTime[i], priority[i], waitingTime[i], turnaroundTime[i]);
         averageTurnaroundTime += turnaroundTime[i];
+        waitingTime[i] = (i == 0) ? 0 : turnaroundTime[i - 1];
         averageWaitingTime += waitingTime[i];
+        printf("P%d\t%d\t%d\t%d\t%d\n", processId[i], burstTime[i], priority[i], waitingTime[i], turnaroundTime[i]);
     }
     printf("Average waiting time: %.2f\n", averageWaitingTime / n);
     printf("Average turn around time: %.2f\n", averageTurnaroundTime / n);
