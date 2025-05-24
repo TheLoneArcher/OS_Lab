@@ -1,13 +1,13 @@
 #include <stdio.h>
 void bestFit(int partitions[], int m, int processes[], int n) {
     int allocation[n];
-    for (int i = 0; i < n; i++) allocation[i] = -1;
+    for (int i = 0; i < n; i++) allocation[i] = -1; // initialize allocation array to be -1 for all
     for (int i = 0; i < n; i++) {
-        int minIndex = -1;
-        for (int j = 0; j < m; j++) if (partitions[j] >= processes[i] && (minIndex == -1 || partitions[j] < partitions[minIndex])) minIndex = j;
+        int minIndex = -1; // find minimum index
+        for (int j = 0; j < m; j++) if (partitions[j] >= processes[i] && (minIndex == -1 || partitions[j] < partitions[minIndex])) minIndex = j; // if partitions are great enough to hold the process and minimum is not there or if partition is less than min index, update min index
         if (minIndex != -1) {
             allocation[i] = minIndex;
-            partitions[minIndex] -= processes[i];
+            partitions[minIndex] -= processes[i]; // subtract the process memory needed from the partition as the partition has allocated space to the process
         }
     }
     for (int i = 0; i < n; i++) {
